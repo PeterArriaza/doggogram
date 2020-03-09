@@ -6,7 +6,8 @@ export default class SearchDoggos extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      breedList: null
+      breedList: null,
+      breed: "affenpinscher"
     };
   }
 
@@ -17,8 +18,18 @@ export default class SearchDoggos extends React.Component {
       .then(data => this.setState({ breedList: data.message }));
   }
 
+  handleChange = breed => {
+    this.setState({ breed });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.addDoggo(this.state.breed);
+    this.props.history.push("/");
+  };
+
   render() {
-    console.log("breeds are", this.state.breedList);
+    console.log("breeds is", this.state.breed);
     let breeds;
     this.state.breedList === null
       ? (breeds = "")
@@ -30,14 +41,25 @@ export default class SearchDoggos extends React.Component {
 
     return (
       <div>
-        <p>SearchDoggos</p>
+        <p>Search Doggos</p>
         <form>
           <label>Pick a breed:</label>
-          <select id="breeds">{breeds}</select>
+          <select id="breeds" onChange={e => this.handleChange(e.target.value)}>
+            {breeds}
+          </select>
+          <div className="buttonRow">
+            <Link to="/">
+              <button>Cancel</button>
+            </Link>
+            <button
+              type="submit"
+              id="submitDoggo"
+              onClick={e => this.handleSubmit(e)}
+            >
+              Add Breed
+            </button>
+          </div>
         </form>
-        <Link to="/">
-          <button>Cancel</button>
-        </Link>
       </div>
     );
   }

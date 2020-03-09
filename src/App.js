@@ -5,18 +5,45 @@ import ListDoggos from "./components/ListDoggos";
 import SearchDoggos from "./components/SearchDoggos";
 import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <Router>
-        <Navbar />
-        <header className="App-header">
-          <Route exact path="/" component={ListDoggos} />
-          <Route exact path="/search" component={SearchDoggos} />
-        </header>
-      </Router>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      collection: []
+    };
+  }
+
+  addDoggoToCollection = doggo => {
+    this.setState({ collection: [...this.state.collection, doggo] });
+    console.log(this.state.collection);
+  };
+
+  render() {
+    return (
+      <div className="App">
+        <Router>
+          <Navbar />
+          <div className="App-body">
+            <Route
+              exact
+              path="/"
+              render={() => <ListDoggos doggos={this.state.collection} />}
+            />
+            <Route
+              exact
+              path="/search"
+              render={props => (
+                <SearchDoggos
+                  {...props}
+                  addDoggo={doggo => this.addDoggoToCollection(doggo)}
+                />
+              )}
+            />
+          </div>
+        </Router>
+      </div>
+    );
+  }
 }
 
 export default App;
