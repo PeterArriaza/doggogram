@@ -1,13 +1,20 @@
 import React from "react";
-import logo from "./logo.svg";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import ListDoggos from "./components/ListDoggos";
+import SearchDoggos from "./components/SearchDoggos";
 import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Doggogram</h1>
-      </header>
+      <Router>
+        <Navbar />
+        <header className="App-header">
+          <Route exact path="/" component={ListDoggos} />
+          <Route exact path="/search" component={SearchDoggos} />
+        </header>
+      </Router>
     </div>
   );
 }
