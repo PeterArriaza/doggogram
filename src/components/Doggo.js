@@ -15,8 +15,18 @@ export default class ListDoggos extends React.Component {
 
   render() {
     return (
-      <div>
-        <h2>{this.props.breed}</h2>
+      <div className="doggoCard">
+        {/* <div>Icons made by <a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from 
+          <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> */}
+        <div className="cardTitle">
+          <img
+            className="delete"
+            alt="delete"
+            src="../img/delete.png"
+            onClick={() => this.props.removeCard(this.props.breed)}
+          ></img>
+          <h2>{this.props.breed}</h2>
+        </div>
         <img src={this.state.imgURL} className="doggoImage"></img>
       </div>
     );

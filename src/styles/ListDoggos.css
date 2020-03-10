@@ -1,0 +1,11 @@
+.listContainer {
+  width: 100%;
+  padding: 40px;
+}
+
+.list {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 100%;
+}

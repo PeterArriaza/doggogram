@@ -2,3 +2,16 @@
   max-width: 300px;
   max-height: 300px;
 }
+
+.doggoCard {
+  background-color: rgb(233, 227, 220);
+  color: #282c34;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 40px;
+  min-width: 360px;
+}
+
+.delete {
+  height: 40px;
+}

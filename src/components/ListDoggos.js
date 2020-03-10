@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Doggo from "./Doggo";
+import "../styles/ListDoggos.css";
 
 export default function ListDoggos(props) {
   console.log(props.doggos);
   return (
-    <div>
+    <div className="listContainer">
       <Link to="/search">
         <button>Search For Doggos</button>
       </Link>
@@ -14,7 +15,12 @@ export default function ListDoggos(props) {
           <p>DoggoList</p>
           <div className="list">
             {props.doggos.map((doggo, index) => (
-              <Doggo breed={doggo} key={index} />
+              <Doggo
+                breed={doggo}
+                key={index}
+                val={index}
+                removeCard={props.removeCard}
+              />
             ))}
           </div>
         </div>

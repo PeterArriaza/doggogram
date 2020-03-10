@@ -14,8 +14,16 @@ class App extends React.Component {
   }
 
   addDoggoToCollection = doggo => {
-    this.setState({ collection: [...this.state.collection, doggo] });
+    this.state.collection.includes(doggo)
+      ? alert("That doggo is already in your collection!")
+      : this.setState({ collection: [...this.state.collection, doggo] });
     console.log(this.state.collection);
+  };
+
+  handleRemoveCard = card => {
+    const currentState = [...this.state.collection];
+    const newState = currentState.filter(breed => breed !== card);
+    this.setState({ collection: newState });
   };
 
   render() {
@@ -27,7 +35,12 @@ class App extends React.Component {
             <Route
               exact
               path="/"
-              render={() => <ListDoggos doggos={this.state.collection} />}
+              render={() => (
+                <ListDoggos
+                  doggos={this.state.collection}
+                  removeCard={card => this.handleRemoveCard(card)}
+                />
+              )}
             />
             <Route
               exact
